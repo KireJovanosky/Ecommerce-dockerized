@@ -1,0 +1,37 @@
+version: "3"
+services:
+  mysql-standalone:
+    image: kirjo/ecommerce-mysql:latest
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: jwt-ecommerce    
+    volumes:
+      - ./Database.sql:/docker-entrypoint-initdb.d/Database.sql
+    networks:
+      - ecommerce-network       
+ 
+
+  ecommerce-backend:
+    image: kirjo/ecommerce-backend:latest
+    ports:
+      - "9090:9090"
+    restart: unless-stopped    #Restart until database initializes completely
+    networks:
+      - ecommerce-network  
+    depends_on:
+      - mysql-standalone
+      
+  ecommerce-ui:
+    image: kirjo/ecommerce-ui:latest
+    ports:
+      - "8080:8080"    
+    networks:
+      - ecommerce-network  
+    depends_on:
+      - ecommerce-backend  
+
+networks:
+    ecommerce-network:   
+
+
