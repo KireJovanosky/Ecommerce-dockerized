@@ -19,7 +19,7 @@ Follow these steps to use the Docker Compose configuration:
      ```
    - Docker Compose will start the defined services in the background.
 
-4. Access the Application:
+4. Access the Application (Please wait for couple of minutes in order for the database and back-end to finish initialization):
    - Open your browser and go to http://localhost:8080
    - Use username: admin password: admin@pass to login into the application as admin and explore its capabilities.
    - Sign up to check the application from a Customer point of view
